@@ -1,0 +1,303 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+
+:root {
+  --color0: goldenrod;
+  --color1: #082032;
+  --color2: #2c394b;
+  --color3: #9db2bf;
+  --color4: #dde6ed;
+}
+
+* {
+  font-family: "Poppins", sans-serif;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--color1);
+  color: var(--color3);
+}
+
+img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* layout */
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 2rem auto 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.search,
+.filter {
+  flex-basis: calc(50% - 1rem);
+}
+
+.grid-container {
+  flex-basis: 100%;
+}
+
+/* search */
+
+.search input {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  padding-left: 20px;
+  border: none;
+  border-radius: 5px;
+  background: var(--color2);
+  color: var(--color4);
+  outline-color: var(--color0);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
+}
+
+.search input::placeholder {
+  color: var(--color3);
+}
+
+.search input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-left: 10px;
+  background: linear-gradient(
+      45deg,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0) 43%,
+      var(--color0) 45%,
+      var(--color0) 55%,
+      rgba(0, 0, 0, 0) 57%,
+      rgba(0, 0, 0, 0) 100%
+    ),
+    linear-gradient(
+      135deg,
+      transparent 0%,
+      transparent 43%,
+      var(--color0) 45%,
+      var(--color0) 55%,
+      transparent 57%,
+      transparent 100%
+    );
+}
+
+/* filter */
+
+.filter {
+  width: 100%;
+  max-width: 250px;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
+  position: relative;
+}
+
+.filter button {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  border: none;
+  border-radius: inherit;
+  background: var(--color2);
+  color: var(--color3);
+}
+
+.filter button:hover {
+  color: var(--color4);
+}
+
+.filter button::after {
+  font-family: "Material Symbols Outlined";
+  content: "expand_more";
+  width: 24px;
+  height: 24px;
+  font-size: 24px;
+  line-height: 1;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+}
+
+.filter.open button::after {
+  content: "expand_less";
+}
+
+.filter .options {
+  position: absolute;
+  top: calc(100% + 2px);
+  z-index: 99;
+  background: var(--color2);
+  width: 100%;
+  border-radius: inherit;
+  box-shadow: inherit;
+  overflow: hidden;
+  opacity: 0;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: 0.2s;
+}
+
+.filter.open .options {
+  opacity: 1;
+  transform: scaleY(1);
+}
+
+.filter .options div {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.filter .options div:hover {
+  background: var(--color1);
+  color: var(--color4);
+}
+
+/* grid */
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto;
+  gap: 2rem;
+}
+
+.grid-container + .no-result {
+  display: none;
+  width: 100%;
+  text-align: center;
+}
+
+.grid-container:empty + .no-result {
+  display: block;
+}
+
+.grid-item {
+  background: var(--color2);
+  border-radius: 10px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+
+.grid-item a {
+  display: block;
+}
+
+.grid-item img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  background: #ddd;
+}
+
+.grid-item div {
+  padding: 1.5rem;
+}
+
+.grid-item h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  margin-bottom: 0.5rem;
+}
+
+.grid-item p {
+  margin-bottom: 0.5rem;
+}
+
+.grid-item label {
+  display: block;
+  color: var(--color0);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+
+@media (min-width: 768px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1024;
+  width: 100%;
+  height: 100%;
+  background: var(--color1);
+  display: none;
+  animation-name: fadeIn;
+  animation-duration: 0.3s;
+}
+
+.modal.show {
+  display: grid;
+  place-items: center;
+}
+
+.modal img {
+  max-width: 80%;
+  max-height: 80vh;
+  margin: auto;
+  filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.25));
+}
+
+.modal figcaption {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: var(--color0);
+}
+
+.modal button[data-dismiss] {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  background: transparent;
+  color: var(--color3);
+}
+
+.modal button[data-dismiss]:hover {
+  color: var(--color4);
+}
+
+.modal button[data-dismiss] span {
+  font-size: 42px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
